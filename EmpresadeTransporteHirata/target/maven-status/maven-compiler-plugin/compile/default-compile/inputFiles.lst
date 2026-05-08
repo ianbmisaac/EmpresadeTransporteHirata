@@ -1,19 +1,22 @@
-C:\Users\ianba\Desktop\GITHUB\EmpresadeTransporteHirata\EmpresadeTransporteHirata\src\main\java\com\mycompany\empresadetransportehirata\Data\CamionDAO.java
-C:\Users\ianba\Desktop\GITHUB\EmpresadeTransporteHirata\EmpresadeTransporteHirata\src\main\java\com\mycompany\empresadetransportehirata\Data\ConductorDAO.java
-C:\Users\ianba\Desktop\GITHUB\EmpresadeTransporteHirata\EmpresadeTransporteHirata\src\main\java\com\mycompany\empresadetransportehirata\Data\conexion.java
-C:\Users\ianba\Desktop\GITHUB\EmpresadeTransporteHirata\EmpresadeTransporteHirata\src\main\java\com\mycompany\empresadetransportehirata\Data\conexionpermisos.java
-C:\Users\ianba\Desktop\GITHUB\EmpresadeTransporteHirata\EmpresadeTransporteHirata\src\main\java\com\mycompany\empresadetransportehirata\Data\consultas.java
-C:\Users\ianba\Desktop\GITHUB\EmpresadeTransporteHirata\EmpresadeTransporteHirata\src\main\java\com\mycompany\empresadetransportehirata\Data\MantenimientoDAO.java
-C:\Users\ianba\Desktop\GITHUB\EmpresadeTransporteHirata\EmpresadeTransporteHirata\src\main\java\com\mycompany\empresadetransportehirata\Data\RegKmCamionesDAO.java
-C:\Users\ianba\Desktop\GITHUB\EmpresadeTransporteHirata\EmpresadeTransporteHirata\src\main\java\com\mycompany\empresadetransportehirata\GUI\almacenarInfoConductor.java
-C:\Users\ianba\Desktop\GITHUB\EmpresadeTransporteHirata\EmpresadeTransporteHirata\src\main\java\com\mycompany\empresadetransportehirata\GUI\almacenInfoCamiones.java
-C:\Users\ianba\Desktop\GITHUB\EmpresadeTransporteHirata\EmpresadeTransporteHirata\src\main\java\com\mycompany\empresadetransportehirata\GUI\gestionRegistrosMantenimiento.java
-C:\Users\ianba\Desktop\GITHUB\EmpresadeTransporteHirata\EmpresadeTransporteHirata\src\main\java\com\mycompany\empresadetransportehirata\GUI\Login.java
-C:\Users\ianba\Desktop\GITHUB\EmpresadeTransporteHirata\EmpresadeTransporteHirata\src\main\java\com\mycompany\empresadetransportehirata\GUI\menu.java
-C:\Users\ianba\Desktop\GITHUB\EmpresadeTransporteHirata\EmpresadeTransporteHirata\src\main\java\com\mycompany\empresadetransportehirata\GUI\registroKilometrajeCamiones.java
-C:\Users\ianba\Desktop\GITHUB\EmpresadeTransporteHirata\EmpresadeTransporteHirata\src\main\java\com\mycompany\empresadetransportehirata\Logica\Camion.java
-C:\Users\ianba\Desktop\GITHUB\EmpresadeTransporteHirata\EmpresadeTransporteHirata\src\main\java\com\mycompany\empresadetransportehirata\Logica\Conductor.java
-C:\Users\ianba\Desktop\GITHUB\EmpresadeTransporteHirata\EmpresadeTransporteHirata\src\main\java\com\mycompany\empresadetransportehirata\Logica\Mantenimiento.java
-C:\Users\ianba\Desktop\GITHUB\EmpresadeTransporteHirata\EmpresadeTransporteHirata\src\main\java\com\mycompany\empresadetransportehirata\Logica\regKmCamiones.java
-C:\Users\ianba\Desktop\GITHUB\EmpresadeTransporteHirata\EmpresadeTransporteHirata\src\main\java\com\mycompany\empresadetransportehirata\Logica\ValidadorDatos.java
-C:\Users\ianba\Desktop\GITHUB\EmpresadeTransporteHirata\EmpresadeTransporteHirata\src\main\java\com\mycompany\empresadetransportehirata\Logica\ValidarRut.java
+C:\Users\ianba\Desktop\prueba wi (1) (1)\prueba wi\EmpresadeTransporteHiratawi\EmpresadeTransporteHirata\src\main\java\com\mycompany\empresadetransportehirata\Data\CamionDAO.java
+C:\Users\ianba\Desktop\prueba wi (1) (1)\prueba wi\EmpresadeTransporteHiratawi\EmpresadeTransporteHirata\src\main\java\com\mycompany\empresadetransportehirata\Data\ConductorDAO.java
+C:\Users\ianba\Desktop\prueba wi (1) (1)\prueba wi\EmpresadeTransporteHiratawi\EmpresadeTransporteHirata\src\main\java\com\mycompany\empresadetransportehirata\Data\conexion.java
+C:\Users\ianba\Desktop\prueba wi (1) (1)\prueba wi\EmpresadeTransporteHiratawi\EmpresadeTransporteHirata\src\main\java\com\mycompany\empresadetransportehirata\Data\conexionpermisos.java
+C:\Users\ianba\Desktop\prueba wi (1) (1)\prueba wi\EmpresadeTransporteHiratawi\EmpresadeTransporteHirata\src\main\java\com\mycompany\empresadetransportehirata\Data\consultas.java
+C:\Users\ianba\Desktop\prueba wi (1) (1)\prueba wi\EmpresadeTransporteHiratawi\EmpresadeTransporteHirata\src\main\java\com\mycompany\empresadetransportehirata\Data\InventarioPiezasDAO.java
+C:\Users\ianba\Desktop\prueba wi (1) (1)\prueba wi\EmpresadeTransporteHiratawi\EmpresadeTransporteHirata\src\main\java\com\mycompany\empresadetransportehirata\Data\MantenimientoDAO.java
+C:\Users\ianba\Desktop\prueba wi (1) (1)\prueba wi\EmpresadeTransporteHiratawi\EmpresadeTransporteHirata\src\main\java\com\mycompany\empresadetransportehirata\Data\RegKmCamionesDAO.java
+C:\Users\ianba\Desktop\prueba wi (1) (1)\prueba wi\EmpresadeTransporteHiratawi\EmpresadeTransporteHirata\src\main\java\com\mycompany\empresadetransportehirata\GUI\almacenarInfoConductor.java
+C:\Users\ianba\Desktop\prueba wi (1) (1)\prueba wi\EmpresadeTransporteHiratawi\EmpresadeTransporteHirata\src\main\java\com\mycompany\empresadetransportehirata\GUI\almacenInfoCamiones.java
+C:\Users\ianba\Desktop\prueba wi (1) (1)\prueba wi\EmpresadeTransporteHiratawi\EmpresadeTransporteHirata\src\main\java\com\mycompany\empresadetransportehirata\GUI\gestionInventarioPiezas.java
+C:\Users\ianba\Desktop\prueba wi (1) (1)\prueba wi\EmpresadeTransporteHiratawi\EmpresadeTransporteHirata\src\main\java\com\mycompany\empresadetransportehirata\GUI\gestionRegistrosMantenimiento.java
+C:\Users\ianba\Desktop\prueba wi (1) (1)\prueba wi\EmpresadeTransporteHiratawi\EmpresadeTransporteHirata\src\main\java\com\mycompany\empresadetransportehirata\GUI\Login.java
+C:\Users\ianba\Desktop\prueba wi (1) (1)\prueba wi\EmpresadeTransporteHiratawi\EmpresadeTransporteHirata\src\main\java\com\mycompany\empresadetransportehirata\GUI\menu.java
+C:\Users\ianba\Desktop\prueba wi (1) (1)\prueba wi\EmpresadeTransporteHiratawi\EmpresadeTransporteHirata\src\main\java\com\mycompany\empresadetransportehirata\GUI\registroKilometrajeCamiones.java
+C:\Users\ianba\Desktop\prueba wi (1) (1)\prueba wi\EmpresadeTransporteHiratawi\EmpresadeTransporteHirata\src\main\java\com\mycompany\empresadetransportehirata\Logica\Camion.java
+C:\Users\ianba\Desktop\prueba wi (1) (1)\prueba wi\EmpresadeTransporteHiratawi\EmpresadeTransporteHirata\src\main\java\com\mycompany\empresadetransportehirata\Logica\Conductor.java
+C:\Users\ianba\Desktop\prueba wi (1) (1)\prueba wi\EmpresadeTransporteHiratawi\EmpresadeTransporteHirata\src\main\java\com\mycompany\empresadetransportehirata\Logica\Mantenimiento.java
+C:\Users\ianba\Desktop\prueba wi (1) (1)\prueba wi\EmpresadeTransporteHiratawi\EmpresadeTransporteHirata\src\main\java\com\mycompany\empresadetransportehirata\Logica\PiezaInventario.java
+C:\Users\ianba\Desktop\prueba wi (1) (1)\prueba wi\EmpresadeTransporteHiratawi\EmpresadeTransporteHirata\src\main\java\com\mycompany\empresadetransportehirata\Logica\regKmCamiones.java
+C:\Users\ianba\Desktop\prueba wi (1) (1)\prueba wi\EmpresadeTransporteHiratawi\EmpresadeTransporteHirata\src\main\java\com\mycompany\empresadetransportehirata\Logica\ValidadorDatos.java
+C:\Users\ianba\Desktop\prueba wi (1) (1)\prueba wi\EmpresadeTransporteHiratawi\EmpresadeTransporteHirata\src\main\java\com\mycompany\empresadetransportehirata\Logica\ValidarRut.java

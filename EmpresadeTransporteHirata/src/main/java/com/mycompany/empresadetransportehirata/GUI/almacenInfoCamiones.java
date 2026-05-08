@@ -3,6 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JInternalFrame.java to edit this template
  */
 package com.mycompany.empresadetransportehirata.GUI;
+
 import com.mycompany.empresadetransportehirata.Data.CamionDAO;
 import com.mycompany.empresadetransportehirata.Data.ConductorDAO;
 import com.mycompany.empresadetransportehirata.Logica.Camion;
@@ -14,7 +15,6 @@ import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPopupMenu;
 import javax.swing.table.DefaultTableModel;
-
 
 /**
  * Pantalla de gestión de camiones.

@@ -630,7 +630,11 @@ public class registroKilometrajeCamiones extends javax.swing.JInternalFrame {
      */
     private void cancelar_btActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelar_btActionPerformed
         // TODO add your handling code here:
-        limpiarFormulario();
+        if (camion_cb.getItemCount() > 0) {
+            camion_cb.setSelectedIndex(0);
+        }
+        actualizarSpinnerConCamionSeleccionado();
+        observacion_txt.setText("");
     }//GEN-LAST:event_cancelar_btActionPerformed
 
     /**
@@ -724,17 +728,6 @@ public class registroKilometrajeCamiones extends javax.swing.JInternalFrame {
             camion_cb.setSelectedIndex(indiceFinal);
             camionSeleccionado = listaCamiones.get(indiceFinal);
         }
-    }
-
-    /**
-     * Restablece la selección del combo y limpia la observación ingresada.
-     */
-    private void limpiarFormulario() {
-        if (camion_cb.getItemCount() > 0) {
-            camion_cb.setSelectedIndex(0);
-        }
-        actualizarSpinnerConCamionSeleccionado();
-        observacion_txt.setText("");
     }
 
     /**

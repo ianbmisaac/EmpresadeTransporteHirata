@@ -18,8 +18,10 @@ public class menu extends javax.swing.JFrame {
     private static final String ROL_CONDUCTOR = "conductor";
     private static final String ROL_ADMIN_FLOTA = "admin_flota";
     private static final String ROL_ADMIN_MANTENIMIENTO = "admin_mantenimiento";
+    private static final String ROL_ADMIN_INVENTARIO = "admin_inventario";
 
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(menu.class.getName());
+    private final String rolUsuarioSesion;
     private final String rutUsuarioSesion;
 
     /**
@@ -39,6 +41,7 @@ public class menu extends javax.swing.JFrame {
      */
     public menu(String rol, String rutUsuarioSesion) {
         initComponents();
+        this.rolUsuarioSesion = rol;
         this.rutUsuarioSesion = rutUsuarioSesion;
         setExtendedState(javax.swing.JFrame.MAXIMIZED_BOTH);
         setTitle("Empresa de Transporte Hirata");
@@ -64,6 +67,7 @@ public class menu extends javax.swing.JFrame {
         estilizarMenuItem(jMenuItem1);
         estilizarMenuItem(jMenuItem2);
         estilizarMenuItem(jMenuItem3);
+        estilizarMenuItem(jMenuItem4);
         estilizarMenuItem(jRadioButtonMenuItem1);
 
         jMenu1.setText("Sesión");
@@ -128,11 +132,13 @@ public class menu extends javax.swing.JFrame {
         bienvenida_bt2 = crearBotonAcceso("🚛 Camiones", e -> abrirVentanaInterna(new almacenInfoCamiones()));
         bienvenida_bt3 = crearBotonAcceso("👤 Conductores", e -> abrirVentanaInterna(new almacenarInfoConductor()));
         bienvenida_bt4 = crearBotonAcceso("🔧 Gestión Mantenimiento", e -> abrirVentanaInterna(new gestionRegistrosMantenimiento()));
+        bienvenida_bt5 = crearBotonAcceso("📦 Inventario de Piezas", e -> abrirVentanaInterna(new gestionInventarioPiezas(rolUsuarioSesion)));
 
         panelBotones.add(bienvenida_bt1);
         panelBotones.add(bienvenida_bt2);
         panelBotones.add(bienvenida_bt3);
         panelBotones.add(bienvenida_bt4);
+        panelBotones.add(bienvenida_bt5);
 
         gbc.gridy = 4;
         gbc.insets = new java.awt.Insets(30, 0, 0, 0);
@@ -249,10 +255,12 @@ public class menu extends javax.swing.JFrame {
         jMenuItem2.setVisible(false);
         jRadioButtonMenuItem1.setVisible(false);
         jMenuItem3.setVisible(false);
+        jMenuItem4.setVisible(false);
         bienvenida_bt1.setVisible(false);
         bienvenida_bt2.setVisible(false);
         bienvenida_bt3.setVisible(false);
         bienvenida_bt4.setVisible(false);
+        bienvenida_bt5.setVisible(false);
 
         if (ROL_CONDUCTOR.equals(rol)) {
             jMenuItem1.setVisible(true);
@@ -271,6 +279,12 @@ public class menu extends javax.swing.JFrame {
         if (ROL_ADMIN_MANTENIMIENTO.equals(rol)) {
             jMenuItem3.setVisible(true);
             bienvenida_bt4.setVisible(true);
+            return;
+        }
+
+        if (ROL_ADMIN_INVENTARIO.equals(rol)) {
+            jMenuItem4.setVisible(true);
+            bienvenida_bt5.setVisible(true);
         }
     }
 
@@ -303,6 +317,7 @@ public class menu extends javax.swing.JFrame {
         jMenuItem2 = new javax.swing.JMenuItem();
         jRadioButtonMenuItem1 = new javax.swing.JRadioButtonMenuItem();
         jMenuItem3 = new javax.swing.JMenuItem();
+        jMenuItem4 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -347,6 +362,14 @@ public class menu extends javax.swing.JFrame {
         });
         jMenu3.add(jMenuItem3);
 
+        jMenuItem4.setText("Control Inventario");
+        jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem4ActionPerformed(evt);
+            }
+        });
+        jMenu3.add(jMenuItem4);
+
         barra.add(jMenu3);
 
         setJMenuBar(barra);
@@ -370,15 +393,27 @@ public class menu extends javax.swing.JFrame {
      *
      * @param evt evento de selección del ítem
      */
+    @SuppressWarnings("unused")
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
         abrirVentanaInterna(new gestionRegistrosMantenimiento());
     }//GEN-LAST:event_jMenuItem3ActionPerformed
+
+    /**
+     * Abre la pantalla de control de inventario desde el menú.
+     *
+     * @param evt evento de selección del ítem
+     */
+    @SuppressWarnings("unused")
+    private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
+        abrirVentanaInterna(new gestionInventarioPiezas(rolUsuarioSesion));
+    }//GEN-LAST:event_jMenuItem4ActionPerformed
 
     /**
      * Abre la pantalla de gestión de conductores desde el menú.
      *
      * @param evt evento de selección del ítem
      */
+    @SuppressWarnings("unused")
     private void jRadioButtonMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonMenuItem1ActionPerformed
         abrirVentanaInterna(new almacenarInfoConductor());
     }//GEN-LAST:event_jRadioButtonMenuItem1ActionPerformed
@@ -388,6 +423,7 @@ public class menu extends javax.swing.JFrame {
      *
      * @param evt evento de selección del ítem
      */
+    @SuppressWarnings("unused")
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
         abrirVentanaInterna(new almacenInfoCamiones());
     }//GEN-LAST:event_jMenuItem2ActionPerformed
@@ -398,6 +434,7 @@ public class menu extends javax.swing.JFrame {
      *
      * @param evt evento de selección del ítem
      */
+    @SuppressWarnings("unused")
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
         abrirVentanaInterna(new registroKilometrajeCamiones(rutUsuarioSesion));
     }//GEN-LAST:event_jMenuItem1ActionPerformed
@@ -448,6 +485,7 @@ public class menu extends javax.swing.JFrame {
     private javax.swing.JButton bienvenida_bt2;
     private javax.swing.JButton bienvenida_bt3;
     private javax.swing.JButton bienvenida_bt4;
+    private javax.swing.JButton bienvenida_bt5;
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuBar barra;
@@ -457,6 +495,7 @@ public class menu extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
+    private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItem1;
     private javax.swing.JDesktopPane panel;
     // End of variables declaration//GEN-END:variables

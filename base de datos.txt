@@ -5,6 +5,7 @@ USE empresa_de_transportes;
 SET FOREIGN_KEY_CHECKS = 0;
 DROP TABLE IF EXISTS regKmCamiones;
 DROP TABLE IF EXISTS mantenimientos;
+DROP TABLE IF EXISTS inventario_piezas;
 DROP TABLE IF EXISTS camiones;
 DROP TABLE IF EXISTS conductores;
 DROP TABLE IF EXISTS users;
@@ -15,7 +16,7 @@ CREATE TABLE users (
     rut VARCHAR(10) NOT NULL PRIMARY KEY,
     nombre VARCHAR(50) NOT NULL,
     pass VARCHAR(255) NOT NULL,
-    rol ENUM('conductor', 'admin_flota', 'admin_mantenimiento') NOT NULL
+    rol ENUM('conductor', 'admin_flota', 'admin_mantenimiento', 'admin_inventario') NOT NULL
 
 );
 INSERT INTO users (rut, nombre, pass, rol)
@@ -23,6 +24,9 @@ VALUES ('22365874-1', 'Admin Flota', '1234', 'admin_flota');
 
 INSERT INTO users (rut, nombre, pass, rol)
 VALUES ('22276870-5', 'Pedro Soto', 'pepe', 'admin_mantenimiento');
+
+INSERT INTO users (rut, nombre, pass, rol)
+VALUES ('20134567-7', 'Admin Inventario', 'inv1234', 'admin_inventario');
 
 SELECT * FROM users;
 
@@ -67,6 +71,19 @@ CREATE TABLE mantenimientos (
     taller VARCHAR(100)
 );
 	
+-- Inventario de piezas de repuesto
+CREATE TABLE inventario_piezas (
+    id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    nombre VARCHAR(100) NOT NULL UNIQUE,
+    descripcion VARCHAR(255),
+    cantidad INT NOT NULL DEFAULT 0,
+    unidad VARCHAR(50) NOT NULL,
+    stock_minimo INT NOT NULL DEFAULT 1,
+    ubicacion VARCHAR(100),
+    fecha_registro DATE NOT NULL,
+    ultima_actualizacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
 -- Registro de kilometraje
 CREATE TABLE regKmCamiones (
     id INT AUTO_INCREMENT PRIMARY KEY,

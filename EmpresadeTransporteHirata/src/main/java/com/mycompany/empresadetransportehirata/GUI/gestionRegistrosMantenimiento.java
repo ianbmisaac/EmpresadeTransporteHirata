@@ -4,21 +4,21 @@
  */
 package com.mycompany.empresadetransportehirata.GUI;
 
-import com.mycompany.empresadetransportehirata.Data.MantenimientoDAO;
 import com.mycompany.empresadetransportehirata.Data.CamionDAO;
+import com.mycompany.empresadetransportehirata.Data.MantenimientoDAO;
 import com.mycompany.empresadetransportehirata.Logica.Mantenimiento;
 import com.mycompany.empresadetransportehirata.Logica.ValidadorDatos;
-import javax.swing.table.DefaultTableModel;
-import javax.swing.JOptionPane;
-import javax.swing.JPopupMenu;
-import javax.swing.JMenuItem;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.Date;
+import java.util.List;
+import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
+import javax.swing.JPopupMenu;
 import javax.swing.SwingUtilities;
 import javax.swing.event.InternalFrameAdapter;
 import javax.swing.event.InternalFrameEvent;
-import java.util.List;
-import java.util.Date;
+import javax.swing.table.DefaultTableModel;
 
 /**
  * Pantalla de gestión de mantenimientos.

@@ -16,6 +16,7 @@ import com.mycompany.empresadetransportehirata.Data.ConductorDAO;
 import com.mycompany.empresadetransportehirata.Data.consultas;
 import com.mycompany.empresadetransportehirata.Logica.Conductor;
 import com.mycompany.empresadetransportehirata.Logica.ValidarRut;
+
 /**
  * Pantalla de gestión de conductores.
  *

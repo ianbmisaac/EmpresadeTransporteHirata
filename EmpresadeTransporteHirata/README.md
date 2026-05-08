@@ -1,2 +1,0 @@
-# EmpresadeTransporteHirata
-Etapa 2
