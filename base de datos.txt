@@ -1,0 +1,78 @@
+CREATE DATABASE IF NOT EXISTS empresa_de_transportes;
+USE empresa_de_transportes;
+
+-- (Opcional) limpiar tablas si vas a recrear todo
+SET FOREIGN_KEY_CHECKS = 0;
+DROP TABLE IF EXISTS regKmCamiones;
+DROP TABLE IF EXISTS mantenimientos;
+DROP TABLE IF EXISTS camiones;
+DROP TABLE IF EXISTS conductores;
+DROP TABLE IF EXISTS users;
+SET FOREIGN_KEY_CHECKS = 1;
+
+-- Usuarios del sistema
+CREATE TABLE users (
+    rut VARCHAR(10) NOT NULL PRIMARY KEY,
+    nombre VARCHAR(50) NOT NULL,
+    pass VARCHAR(255) NOT NULL,
+    rol ENUM('conductor', 'admin_flota', 'admin_mantenimiento') NOT NULL
+
+);
+INSERT INTO users (rut, nombre, pass, rol)
+VALUES ('22365874-1', 'Admin Flota', '1234', 'admin_flota');
+
+INSERT INTO users (rut, nombre, pass, rol)
+VALUES ('22276870-5', 'Pedro Soto', 'pepe', 'admin_mantenimiento');
+
+SELECT * FROM users;
+
+Select * from conductores;
+select * from camiones;
+select * from regKmCamiones;
+select * from mantenimientos;
+show tables;
+
+-- Conductores
+-- licencia YA NO es UNIQUE (se puede repetir)
+CREATE TABLE conductores (
+    id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    rut VARCHAR(10) NOT NULL UNIQUE,
+    nombre VARCHAR(100) NOT NULL,
+    apellido VARCHAR(100) NOT NULL,
+    licencia VARCHAR(20) NOT NULL
+);
+
+-- Camiones
+CREATE TABLE camiones (
+    id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    patente VARCHAR(20) NOT NULL UNIQUE,
+    marca VARCHAR(100) NOT NULL,
+    modelo VARCHAR(100) NOT NULL,
+    ano DATE NOT NULL,
+    kmInicial INT NOT NULL,
+    id_conductor INT NULL
+);
+
+-- Mantenimientos
+
+CREATE TABLE mantenimientos (
+    id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    camion VARCHAR(20) NOT NULL,
+    tipoMantenimiento VARCHAR(255) NOT NULL,
+    fecha DATE NOT NULL,
+    kmActual INT NOT NULL,
+    costo INT NOT NULL,
+    estado INT NOT NULL,
+    observacion VARCHAR(255),
+    taller VARCHAR(100)
+);
+	
+-- Registro de kilometraje
+CREATE TABLE regKmCamiones (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    id_camion INT NOT NULL,
+    id_conductor INT NOT NULL,
+    kilometraje INT NOT NULL,
+    observacion VARCHAR(255),
+    fecha TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
