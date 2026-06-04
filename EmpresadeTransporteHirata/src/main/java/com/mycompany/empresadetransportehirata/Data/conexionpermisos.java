@@ -21,7 +21,7 @@ public class conexionpermisos {
             Connection cn = DriverManager.getConnection(
                 "jdbc:mysql://localhost:3306/empresa_de_transportes",
                 "root",  
-                "troler200"       
+                "1234"       
             );
             return cn;
         } catch (Exception e) {

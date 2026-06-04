@@ -16,7 +16,7 @@ CREATE TABLE users (
     rut VARCHAR(10) NOT NULL PRIMARY KEY,
     nombre VARCHAR(50) NOT NULL,
     pass VARCHAR(255) NOT NULL,
-    rol ENUM('conductor', 'admin_flota', 'admin_mantenimiento', 'admin_inventario') NOT NULL
+    rol ENUM('conductor', 'admin_flota', 'admin_mantenimiento', 'admin_inventario', 'tecnico_it') NOT NULL
 
 );
 INSERT INTO users (rut, nombre, pass, rol)
@@ -27,6 +27,9 @@ VALUES ('22276870-5', 'Pedro Soto', 'pepe', 'admin_mantenimiento');
 
 INSERT INTO users (rut, nombre, pass, rol)
 VALUES ('20134567-7', 'Admin Inventario', 'inv1234', 'admin_inventario');
+
+INSERT INTO users (rut, nombre, pass, rol)
+VALUES ('22358026-5', 'Tecnico IT', 'colocolo', 'tecnico_it');
 
 SELECT * FROM users;
 

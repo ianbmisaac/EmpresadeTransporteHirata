@@ -19,6 +19,7 @@ public class menu extends javax.swing.JFrame {
     private static final String ROL_ADMIN_FLOTA = "admin_flota";
     private static final String ROL_ADMIN_MANTENIMIENTO = "admin_mantenimiento";
     private static final String ROL_ADMIN_INVENTARIO = "admin_inventario";
+    private static final String ROL_TECNICO_IT = "tecnico_it";
 
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(menu.class.getName());
     private final String rolUsuarioSesion;
@@ -256,6 +257,7 @@ public class menu extends javax.swing.JFrame {
         jRadioButtonMenuItem1.setVisible(false);
         jMenuItem3.setVisible(false);
         jMenuItem4.setVisible(false);
+        jMenuItem5.setVisible(false);
         bienvenida_bt1.setVisible(false);
         bienvenida_bt2.setVisible(false);
         bienvenida_bt3.setVisible(false);
@@ -285,6 +287,9 @@ public class menu extends javax.swing.JFrame {
         if (ROL_ADMIN_INVENTARIO.equals(rol)) {
             jMenuItem4.setVisible(true);
             bienvenida_bt5.setVisible(true);
+        }
+        if (ROL_TECNICO_IT.equals(rol)){
+            jMenuItem5.setVisible(true);
         }
     }
 
@@ -318,6 +323,7 @@ public class menu extends javax.swing.JFrame {
         jRadioButtonMenuItem1 = new javax.swing.JRadioButtonMenuItem();
         jMenuItem3 = new javax.swing.JMenuItem();
         jMenuItem4 = new javax.swing.JMenuItem();
+        jMenuItem5 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -369,6 +375,14 @@ public class menu extends javax.swing.JFrame {
             }
         });
         jMenu3.add(jMenuItem4);
+
+        jMenuItem5.setText("Registro Software");
+        jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem5ActionPerformed(evt);
+            }
+        });
+        jMenu3.add(jMenuItem5);
 
         barra.add(jMenu3);
 
@@ -438,6 +452,11 @@ public class menu extends javax.swing.JFrame {
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
         abrirVentanaInterna(new registroKilometrajeCamiones(rutUsuarioSesion));
     }//GEN-LAST:event_jMenuItem1ActionPerformed
+    
+    @SuppressWarnings("unused")
+    private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
+        abrirVentanaInterna(new gestionSoftware(rolUsuarioSesion));
+    }//GEN-LAST:event_jMenuItem5ActionPerformed
 
     /**
      * Cierra la sesión actual y vuelve a la pantalla de login.
@@ -496,6 +515,7 @@ public class menu extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
+    private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItem1;
     private javax.swing.JDesktopPane panel;
     // End of variables declaration//GEN-END:variables

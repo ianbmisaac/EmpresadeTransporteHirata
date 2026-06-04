@@ -251,6 +251,7 @@ public class Login extends javax.swing.JFrame {
         String rut = normalizarRut(user.getText());
         String contrasena = new String(pass.getPassword()).trim();
         
+        
         if (rut.isEmpty()) {
             JOptionPane.showMessageDialog(null, "Debes ingresar un RUT.");
             user.requestFocusInWindow();
