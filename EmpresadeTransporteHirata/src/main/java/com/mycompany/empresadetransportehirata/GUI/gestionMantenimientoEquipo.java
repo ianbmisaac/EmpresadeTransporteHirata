@@ -25,6 +25,7 @@ public class gestionMantenimientoEquipo extends javax.swing.JInternalFrame {
     private DefaultTableModel modeloEquipos;
     private DefaultTableModel modeloMant;
     private List<EquipoOficina> listaEquipos;
+    private List<MantenimientoEquipo> listaMantenimientos;
     private int equipoSeleccionadoId = -1;
 
     // ── Componentes Gráficos (Instanciados manualmente en inicializar()) ──
@@ -383,18 +384,52 @@ public class gestionMantenimientoEquipo extends javax.swing.JInternalFrame {
 
     /** Carga los datos de la fila seleccionada en el formulario de edición. */
     private void cargarFormularioDesdeTabla(int fila) {
-        txt_id.setText(modeloMant.getValueAt(fila, 0).toString());
-        cb_tipo.setSelectedItem(modeloMant.getValueAt(fila, 1).toString());
-        if (modeloMant.getValueAt(fila, 2) != null)
-            fecha_dt.setDate((java.util.Date) modeloMant.getValueAt(fila, 2));
-        txt_tecnico.setText(modeloMant.getValueAt(fila, 3).toString());
-        cb_estado.setSelectedItem(modeloMant.getValueAt(fila, 4).toString());
-        txt_descripcion.setText(modeloMant.getValueAt(fila, 5) != null
-            ? modeloMant.getValueAt(fila, 5).toString() : "");
-        aplicarEstadoBotones(true);
+    txt_id.setText(modeloMant.getValueAt(fila, 0).toString());
+    cb_tipo.setSelectedItem(modeloMant.getValueAt(fila, 1).toString());
+    if (modeloMant.getValueAt(fila, 2) != null)
+        fecha_dt.setDate((java.util.Date) modeloMant.getValueAt(fila, 2));
+    txt_tecnico.setText(modeloMant.getValueAt(fila, 3).toString());
+    cb_estado.setSelectedItem(modeloMant.getValueAt(fila, 4).toString());
+    txt_descripcion.setText(modeloMant.getValueAt(fila, 5) != null
+        ? modeloMant.getValueAt(fila, 5).toString() : "");
+
+    // ── Restaurar pieza/insumo y cantidad desde listaMantenimientos ──
+    int idMantenimiento = Integer.parseInt(txt_id.getText().trim());
+    MantenimientoEquipo mantEncontrado = null;
+    if (listaMantenimientos != null) {
+        for (MantenimientoEquipo m : listaMantenimientos) {
+            if (m.getId() == idMantenimiento) {
+                mantEncontrado = m;
+                break;
+            }
+        }
+    }
+    if (mantEncontrado != null && mantEncontrado.getIdPieza() > 0) {
+        int idxCombo = 0;
+        if (listaPiezasDisponibles != null) {
+            for (int i = 0; i < listaPiezasDisponibles.size(); i++) {
+                if (listaPiezasDisponibles.get(i).getId() == mantEncontrado.getIdPieza()) {
+                    idxCombo = i + 1; // +1 porque índice 0 es "Ninguno"
+                    break;
+                }
+            }
+        }
+        cb_piezasInventario.setSelectedIndex(idxCombo);
+        spn_cantidadPieza.setValue(mantEncontrado.getCantidadPieza());
+    } else {
+        cb_piezasInventario.setSelectedIndex(0);
+        spn_cantidadPieza.setValue(0);
     }
 
-    /** Muestra un diálogo con los detalles del mantenimiento seleccionado. */
+    aplicarEstadoBotones(true);
+    }
+
+    /** Muestra un diálogo con 
+     * 
+     * 
+     * 
+     * 
+     * los detalles del mantenimiento seleccionado. */
     private void verDetalles() {
         int fila = tabla_mant.getSelectedRow();
         if (fila < 0) return;
@@ -483,15 +518,17 @@ public class gestionMantenimientoEquipo extends javax.swing.JInternalFrame {
 
     /** Refresca la tabla de mantenimientos para el equipo indicado. */
     private void cargarMantenimientos(int idEquipo) {
-        modeloMant.setRowCount(0);
-        for (MantenimientoEquipo m : daoMant.listarHistorial()) {
-            if (m.getIdEquipo() == idEquipo) {
-                modeloMant.addRow(new Object[]{
-                    m.getId(), m.getTipoMantenimiento(), m.getFecha(),
-                    m.getTecnico(), m.getEstado(), m.getDescripcion()
-                });
-            }
+       modeloMant.setRowCount(0);
+    listaMantenimientos = new java.util.ArrayList<>();
+    for (MantenimientoEquipo m : daoMant.listarHistorial()) {
+        if (m.getIdEquipo() == idEquipo) {
+            listaMantenimientos.add(m);
+            modeloMant.addRow(new Object[]{
+                m.getId(), m.getTipoMantenimiento(), m.getFecha(),
+                m.getTecnico(), m.getEstado(), m.getDescripcion()
+            });
         }
+    }
     }
 
     /** Restablece el formulario y las selecciones a su estado inicial. */
