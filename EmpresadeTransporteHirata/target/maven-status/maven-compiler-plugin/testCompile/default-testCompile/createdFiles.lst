@@ -2,5 +2,5 @@ com\mycompany\empresadetransportehirata\Logica\ConductorTest.class
 com\mycompany\empresadetransportehirata\Logica\regKmCamionesTest.class
 com\mycompany\empresadetransportehirata\Logica\ValidarRutTest.class
 com\mycompany\empresadetransportehirata\Logica\MantenimientoTest.class
-com\mycompany\empresadetransportehirata\Logica\ValidadorDatosTest.class
 com\mycompany\empresadetransportehirata\Logica\CamionTest.class
+com\mycompany\empresadetransportehirata\Logica\ValidadorDatosTest.class
