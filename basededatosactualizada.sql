@@ -105,6 +105,18 @@ INSERT INTO `equipos_oficina` VALUES (1,'PC Recepción','PC','Dell','OptiPlex 70
 /*!40000 ALTER TABLE `equipos_oficina` ENABLE KEYS */;
 UNLOCK TABLES;
 
+CREATE TABLE `historial_mantenimiento_equipos` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `id_equipo` int NOT NULL,
+  `tipo_mantenimiento` varchar(100) NOT NULL,
+  `fecha` date NOT NULL,
+  `tecnico` varchar(100) NOT NULL,
+  `descripcion` text,
+  `estado` varchar(50) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `fk_historial_equipo` (`id_equipo`),
+  CONSTRAINT `fk_historial_equipo` FOREIGN KEY (`id_equipo`) REFERENCES `equipos_oficina` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 --
 -- Table structure for table `inventario_piezas`
 --
