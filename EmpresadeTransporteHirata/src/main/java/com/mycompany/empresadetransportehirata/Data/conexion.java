@@ -14,7 +14,7 @@ public class conexion {
     
      private static final String URL = "jdbc:mysql://localhost:3306/empresa_de_transportes";
     private static final String USUARIO = "root";
-    private static final String CONTRASENA = "picha10";
+    private static final String CONTRASENA = "3143";
 
     /**
      * Abre una conexión JDBC a la base de datos configurada.

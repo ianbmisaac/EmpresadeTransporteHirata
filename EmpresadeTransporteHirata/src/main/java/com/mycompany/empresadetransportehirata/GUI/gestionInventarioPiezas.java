@@ -54,6 +54,7 @@ public class gestionInventarioPiezas extends javax.swing.JInternalFrame {
     private JMenuItem opcionEliminarTabla;
     private TableRowSorter<DefaultTableModel> sorterTabla;
     private int idEditando = -1;
+    private boolean advertenciaStockInicialMostrada = false;
 
     /**
      * Inicializa la ventana y configura su estilo, listeners y datos.
@@ -88,6 +89,7 @@ public class gestionInventarioPiezas extends javax.swing.JInternalFrame {
         configurarInteraccionesTabla();
         limpiarFormulario();
         cargarTabla();
+        mostrarAdvertenciaInicialStockBajo();
     }
 
     /**
@@ -504,6 +506,34 @@ public class gestionInventarioPiezas extends javax.swing.JInternalFrame {
             alertaStock_lb.setText("Atención: hay piezas bajo el stock mínimo.");
         } else {
             alertaStock_lb.setText("Inventario dentro de los rangos esperados.");
+        }
+    }
+
+    /**
+     * Muestra una advertencia inicial si hay piezas con stock bajo al abrir la pantalla.
+     */
+    private void mostrarAdvertenciaInicialStockBajo() {
+        if (advertenciaStockInicialMostrada) {
+            return;
+        }
+        advertenciaStockInicialMostrada = true;
+
+        StringBuilder mensajes = new StringBuilder();
+        for (int i = 0; i < modeloTabla.getRowCount(); i++) {
+            if ("Stock bajo".equals(modeloTabla.getValueAt(i, 8))) {
+                mensajes.append("- ")
+                        .append(modeloTabla.getValueAt(i, 1)).append(" (Cantidad: ")
+                        .append(modeloTabla.getValueAt(i, 3)).append(", Stock mínimo: ")
+                        .append(modeloTabla.getValueAt(i, 5)).append(")\n");
+            }
+        }
+
+        if (mensajes.length() > 0) {
+            JOptionPane.showMessageDialog(this,
+                    "Se detectaron las siguientes piezas con stock mínimo:\n\n" + mensajes.toString() +
+                    "\nRevise estos cambios en el inventario y reabastezca cuanto antes.",
+                    "Advertencia de stock mínimo",
+                    JOptionPane.WARNING_MESSAGE);
         }
     }
 

@@ -289,13 +289,27 @@ public class gestionMantenimientoEquipo extends javax.swing.JInternalFrame {
         if (idGenerado > 0) {
             actualizarEstadoHardwareFisico(equipoSeleccionadoId, m.getEstado());
 
-            // Si se seleccionó pieza, vincular y restar stock
+            boolean usoPiezaRegistrado = true;
             if (itemSeleccionado > 0 && cantidadPedida > 0) {
                 com.mycompany.empresadetransportehirata.Logica.PiezaInventario piezaActual = listaPiezasDisponibles.get(itemSeleccionado - 1);
-                daoMant.registrarUsoPieza(idGenerado, piezaActual.getId(), cantidadPedida);
+                int stockRestante = piezaActual.getCantidad() - cantidadPedida;
+                usoPiezaRegistrado = daoMant.registrarUsoPieza(idGenerado, piezaActual.getId(), cantidadPedida);
+
+                if (usoPiezaRegistrado && stockRestante <= piezaActual.getStockMinimo()) {
+                    JOptionPane.showMessageDialog(this,
+                        "Advertencia: la pieza '" + piezaActual.getNombre() + "' alcanzó stock mínimo.\n" +
+                        "Stock restante: " + stockRestante + " (mínimo: " + piezaActual.getStockMinimo() + ")",
+                        "Stock mínimo alcanzado",
+                        JOptionPane.WARNING_MESSAGE);
+                }
             }
 
-            JOptionPane.showMessageDialog(this, "Mantenimiento registrado y stock actualizado con éxito.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+            if (usoPiezaRegistrado) {
+                JOptionPane.showMessageDialog(this, "Mantenimiento registrado y stock actualizado con éxito.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+            } else {
+                JOptionPane.showMessageDialog(this, "El mantenimiento se guardó, pero no se pudo actualizar el inventario de la pieza.", "Advertencia", JOptionPane.WARNING_MESSAGE);
+            }
+
             limpiar();
             cargarEquipos();
             cargarMantenimientos(equipoSeleccionadoId);
