@@ -69,6 +69,7 @@ public class menu extends javax.swing.JFrame {
         estilizarMenuItem(jMenuItem2);
         estilizarMenuItem(jMenuItem3);
         estilizarMenuItem(jMenuItem4);
+        estilizarMenuItem(jMenuItem5);
         estilizarMenuItem(jRadioButtonMenuItem1);
 
         jMenu1.setText("Sesión");
@@ -78,7 +79,12 @@ public class menu extends javax.swing.JFrame {
         estilizarMenuItem(cerrarSesionItem);
         cerrarSesionItem.addActionListener(e -> cerrarSesion());
         jMenu1.add(cerrarSesionItem);
-
+        
+        jMenuItem6 = new javax.swing.JMenuItem("Historial Equipos (Oficina)");
+        estilizarMenuItem(jMenuItem6);
+        jMenuItem6.addActionListener(e -> abrirVentanaInterna(new HistorialMantenimientoEquipos(rolUsuarioSesion)));
+        jMenu3.add(jMenuItem6);
+        
         aplicarPermisosPorRol(rol);
     }
 
@@ -134,12 +140,13 @@ public class menu extends javax.swing.JFrame {
         bienvenida_bt3 = crearBotonAcceso("👤 Conductores", e -> abrirVentanaInterna(new almacenarInfoConductor()));
         bienvenida_bt4 = crearBotonAcceso("🔧 Gestión Mantenimiento", e -> abrirVentanaInterna(new gestionRegistrosMantenimiento()));
         bienvenida_bt5 = crearBotonAcceso("📦 Inventario de Piezas", e -> abrirVentanaInterna(new gestionInventarioPiezas(rolUsuarioSesion)));
-
+        bienvenida_bt6 = crearBotonAcceso("📂 Historial Equipos", e -> abrirVentanaInterna(new HistorialMantenimientoEquipos(rolUsuarioSesion)));
         panelBotones.add(bienvenida_bt1);
         panelBotones.add(bienvenida_bt2);
         panelBotones.add(bienvenida_bt3);
         panelBotones.add(bienvenida_bt4);
         panelBotones.add(bienvenida_bt5);
+        panelBotones.add(bienvenida_bt6);
 
         gbc.gridy = 4;
         gbc.insets = new java.awt.Insets(30, 0, 0, 0);
@@ -258,11 +265,13 @@ public class menu extends javax.swing.JFrame {
         jMenuItem3.setVisible(false);
         jMenuItem4.setVisible(false);
         jMenuItem5.setVisible(false);
+        jMenuItem6.setVisible(false);
         bienvenida_bt1.setVisible(false);
         bienvenida_bt2.setVisible(false);
         bienvenida_bt3.setVisible(false);
         bienvenida_bt4.setVisible(false);
         bienvenida_bt5.setVisible(false);
+        bienvenida_bt6.setVisible(false);
 
         if (ROL_CONDUCTOR.equals(rol)) {
             jMenuItem1.setVisible(true);
@@ -290,6 +299,8 @@ public class menu extends javax.swing.JFrame {
         }
         if (ROL_TECNICO_IT.equals(rol)){
             jMenuItem5.setVisible(true);
+            if(bienvenida_bt6 != null) bienvenida_bt6.setVisible(true);
+            if(jMenuItem6 != null) jMenuItem6.setVisible(true);
         }
     }
 
@@ -505,7 +516,8 @@ public class menu extends javax.swing.JFrame {
     private javax.swing.JButton bienvenida_bt3;
     private javax.swing.JButton bienvenida_bt4;
     private javax.swing.JButton bienvenida_bt5;
-
+    private javax.swing.JButton bienvenida_bt6;
+    private javax.swing.JMenuItem jMenuItem6;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuBar barra;
     private javax.swing.JMenu jMenu1;
