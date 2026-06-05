@@ -8,6 +8,11 @@ import com.mycompany.empresadetransportehirata.Data.EquipoOficinaDAO;
 import com.mycompany.empresadetransportehirata.Data.SoftwareDAO;
 import com.mycompany.empresadetransportehirata.Logica.EquipoOficina;
 import com.mycompany.empresadetransportehirata.Logica.Software;
+import java.awt.Color;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import javax.swing.JMenuItem;
+import javax.swing.JPopupMenu;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import java.util.List;
@@ -29,6 +34,7 @@ public class gestionSoftware extends javax.swing.JInternalFrame {
 
     private Software softwareSeleccionado = null;
     private EquipoOficina equipoSeleccionado = null;
+    private boolean editandoSoftware = false;
 
     /**
      * Crea el formulario de gestión de software e inicializa las tablas.
@@ -38,11 +44,203 @@ public class gestionSoftware extends javax.swing.JInternalFrame {
     public gestionSoftware(String rolUsuarioSesion) {
         this.rolUsuarioSesion = rolUsuarioSesion;
         initComponents();
+        aplicarEstiloVisual();
         cargarTablaSoftware();
         cargarTablaEquipos();
+        configurarPopupMenus();
 
         this.setClosable(true);
         this.setTitle("Gestión de Software");
+    }
+
+    private void aplicarEstiloVisual() {
+        Color fondoPrincipal = new Color(242, 248, 255);
+        Color fondoPanel = new Color(230, 241, 252);
+        Color colorTitulo = new Color(22, 90, 148);
+        Color colorCampo = new Color(250, 253, 255);
+        Color colorBordeCampo = new Color(160, 192, 224);
+        Color headerBg = new Color(70, 130, 180);
+        Color seleccion = new Color(100, 149, 237);
+
+        getContentPane().setBackground(fondoPrincipal);
+        jPanel1.setBackground(fondoPanel);
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(
+                javax.swing.BorderFactory.createLineBorder(new Color(120, 170, 220), 2),
+                "Gestor de Software",
+                javax.swing.border.TitledBorder.LEFT,
+                javax.swing.border.TitledBorder.DEFAULT_POSITION,
+                new java.awt.Font("Segoe UI", java.awt.Font.BOLD, 13),
+                colorTitulo));
+
+        javax.swing.JLabel[] labels = new javax.swing.JLabel[]{
+            jLabel1, jLabel2, jLabel3, jLabel4
+        };
+        for (javax.swing.JLabel label : labels) {
+            if (label != null) {
+                label.setForeground(colorTitulo);
+                label.setFont(new java.awt.Font("Segoe UI", java.awt.Font.BOLD, 12));
+            }
+        }
+
+        id_txt.setBackground(colorCampo);
+        software_txt.setBackground(colorCampo);
+        jTextField1.setBackground(colorCampo);
+        cb_elegirtodoslosequipos.setBackground(fondoPanel);
+
+        id_txt.setBorder(javax.swing.BorderFactory.createLineBorder(colorBordeCampo, 2, true));
+        software_txt.setBorder(javax.swing.BorderFactory.createLineBorder(colorBordeCampo, 2, true));
+        jTextField1.setBorder(javax.swing.BorderFactory.createLineBorder(colorBordeCampo, 2, true));
+        cb_elegirtodoslosequipos.setForeground(colorTitulo);
+
+        bt_registrar.setBackground(new Color(34, 139, 34));
+        bt_registrar.setForeground(Color.WHITE);
+        bt_registrar.setFont(bt_registrar.getFont().deriveFont(java.awt.Font.BOLD));
+        bt_registrar.setBorder(javax.swing.BorderFactory.createLineBorder(new Color(20, 100, 20), 2, true));
+        bt_registrar.setFocusPainted(false);
+
+        bt_eliminar.setBackground(new Color(178, 34, 34));
+        bt_eliminar.setForeground(Color.WHITE);
+        bt_eliminar.setFont(bt_eliminar.getFont().deriveFont(java.awt.Font.BOLD));
+        bt_eliminar.setBorder(javax.swing.BorderFactory.createLineBorder(new Color(128, 20, 20), 2, true));
+        bt_eliminar.setFocusPainted(false);
+
+        bt_asignar.setBackground(new Color(255, 140, 0));
+        bt_asignar.setForeground(Color.WHITE);
+        bt_asignar.setFont(bt_asignar.getFont().deriveFont(java.awt.Font.BOLD));
+        bt_asignar.setBorder(javax.swing.BorderFactory.createLineBorder(new Color(200, 95, 0), 2, true));
+        bt_asignar.setFocusPainted(false);
+
+        bt_quitar.setBackground(new Color(70, 130, 180));
+        bt_quitar.setForeground(Color.WHITE);
+        bt_quitar.setFont(bt_quitar.getFont().deriveFont(java.awt.Font.BOLD));
+        bt_quitar.setBorder(javax.swing.BorderFactory.createLineBorder(new Color(40, 90, 140), 2, true));
+        bt_quitar.setFocusPainted(false);
+
+        bt_cancelar.setBackground(new Color(70, 130, 180));
+        bt_cancelar.setForeground(Color.WHITE);
+        bt_cancelar.setFont(bt_cancelar.getFont().deriveFont(java.awt.Font.BOLD));
+        bt_cancelar.setBorder(javax.swing.BorderFactory.createLineBorder(new Color(40, 90, 140), 2, true));
+        bt_cancelar.setFocusPainted(false);
+
+        tbl_software.setRowHeight(26);
+        tbl_software.setFont(new java.awt.Font("Segoe UI", java.awt.Font.PLAIN, 12));
+        tbl_software.setSelectionBackground(seleccion);
+        tbl_software.setSelectionForeground(Color.WHITE);
+        tbl_software.setGridColor(new Color(210, 210, 210));
+        tbl_software.getTableHeader().setFont(new java.awt.Font("Segoe UI", java.awt.Font.BOLD, 12));
+        tbl_software.getTableHeader().setBackground(headerBg);
+        tbl_software.getTableHeader().setForeground(Color.WHITE);
+
+        tbl_equipos.setRowHeight(26);
+        tbl_equipos.setFont(new java.awt.Font("Segoe UI", java.awt.Font.PLAIN, 12));
+        tbl_equipos.setSelectionBackground(seleccion);
+        tbl_equipos.setSelectionForeground(Color.WHITE);
+        tbl_equipos.setGridColor(new Color(210, 210, 210));
+        tbl_equipos.getTableHeader().setFont(new java.awt.Font("Segoe UI", java.awt.Font.BOLD, 12));
+        tbl_equipos.getTableHeader().setBackground(headerBg);
+        tbl_equipos.getTableHeader().setForeground(Color.WHITE);
+
+        jScrollPane1.getViewport().setBackground(Color.WHITE);
+        jScrollPane2.getViewport().setBackground(Color.WHITE);
+        jScrollPane1.setBorder(javax.swing.BorderFactory.createLineBorder(new Color(120, 170, 220), 2));
+        jScrollPane2.setBorder(javax.swing.BorderFactory.createLineBorder(new Color(120, 170, 220), 2));
+    }
+
+    private void configurarPopupMenus() {
+        JPopupMenu menuSoftware = new JPopupMenu();
+
+        JMenuItem opcionVerSoftware = new JMenuItem("Ver detalles");
+        opcionVerSoftware.addActionListener(e -> mostrarDetallesSoftwareSeleccionado());
+        menuSoftware.add(opcionVerSoftware);
+
+        menuSoftware.addSeparator();
+
+        JMenuItem opcionEditarSoftware = new JMenuItem("Editar");
+        opcionEditarSoftware.addActionListener(e -> editarSoftwareSeleccionado());
+        menuSoftware.add(opcionEditarSoftware);
+
+        JMenuItem opcionEliminarSoftware = new JMenuItem("Eliminar");
+        opcionEliminarSoftware.addActionListener(e -> bt_eliminarActionPerformed(null));
+        menuSoftware.add(opcionEliminarSoftware);
+
+        tbl_software.setComponentPopupMenu(menuSoftware);
+        tbl_software.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent evt) {
+                seleccionarFilaDesdeEvento(tbl_software, evt);
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent evt) {
+                seleccionarFilaDesdeEvento(tbl_software, evt);
+            }
+        });
+
+        JPopupMenu menuEquipos = new JPopupMenu();
+
+        JMenuItem opcionVerEquipo = new JMenuItem("Ver detalles");
+        opcionVerEquipo.addActionListener(e -> mostrarDetallesEquipoSeleccionado());
+        menuEquipos.add(opcionVerEquipo);
+
+        menuEquipos.addSeparator();
+
+        JMenuItem opcionSeleccionarEquipo = new JMenuItem("Seleccionar equipo");
+        opcionSeleccionarEquipo.addActionListener(e -> seleccionarEquipoDesdeTabla());
+        menuEquipos.add(opcionSeleccionarEquipo);
+
+        JMenuItem opcionQuitarSoftware = new JMenuItem("Quitar software");
+        opcionQuitarSoftware.addActionListener(e -> bt_quitarActionPerformed(null));
+        menuEquipos.add(opcionQuitarSoftware);
+
+        tbl_equipos.setComponentPopupMenu(menuEquipos);
+        tbl_equipos.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent evt) {
+                seleccionarFilaDesdeEvento(tbl_equipos, evt);
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent evt) {
+                seleccionarFilaDesdeEvento(tbl_equipos, evt);
+            }
+        });
+    }
+
+    private void seleccionarFilaDesdeEvento(javax.swing.JTable tabla, MouseEvent evt) {
+        int fila = tabla.rowAtPoint(evt.getPoint());
+        if (fila >= 0) {
+            tabla.setRowSelectionInterval(fila, fila);
+        }
+    }
+
+    private void seleccionarSoftwareDesdeTabla() {
+        int fila = tbl_software.getSelectedRow();
+        if (fila < 0) {
+            return;
+        }
+
+        int id = (int) tbl_software.getValueAt(fila, 0);
+        String nombre = (String) tbl_software.getValueAt(fila, 1);
+
+        softwareSeleccionado = new Software();
+        softwareSeleccionado.setId(id);
+        softwareSeleccionado.setNombre(nombre);
+        software_txt.setText(nombre);
+    }
+
+    private void seleccionarEquipoDesdeTabla() {
+        int fila = tbl_equipos.getSelectedRow();
+        if (fila < 0) {
+            return;
+        }
+
+        int id = (int) tbl_equipos.getValueAt(fila, 0);
+        String nombre = (String) tbl_equipos.getValueAt(fila, 1);
+
+        equipoSeleccionado = new EquipoOficina();
+        equipoSeleccionado.setId(id);
+        equipoSeleccionado.setNombre(nombre);
+        id_txt.setText(String.valueOf(id));
     }
 
     /**
@@ -514,8 +712,11 @@ public class gestionSoftware extends javax.swing.JInternalFrame {
         private void limpiarSeleccion() {
             softwareSeleccionado = null;
             equipoSeleccionado = null;
+            editandoSoftware = false;
+            bt_registrar.setText("Registrar");
             id_txt.setText("");
             software_txt.setText("");
+            jTextField1.setText("");
             tbl_software.clearSelection();
             tbl_equipos.clearSelection();
             cb_elegirtodoslosequipos.setSelected(false);
@@ -535,6 +736,22 @@ public class gestionSoftware extends javax.swing.JInternalFrame {
             return;
         }
 
+        if (editandoSoftware && softwareSeleccionado != null) {
+            softwareSeleccionado.setNombre(nombre);
+            boolean ok = softwareDAO.actualizar(softwareSeleccionado);
+            if (ok) {
+                JOptionPane.showMessageDialog(this, "Software actualizado correctamente.");
+                limpiarSeleccion();
+                cargarTablaSoftware();
+                editandoSoftware = false;
+                bt_registrar.setText("Registrar");
+                jTextField1.setText("");
+                return;
+            }
+            JOptionPane.showMessageDialog(this, "Error al actualizar el software.");
+            return;
+        }
+
         Software nuevo = new Software();
         nuevo.setNombre(nombre);
 
@@ -547,6 +764,59 @@ public class gestionSoftware extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(this, "Error al registrar el software.");
         }
     }//GEN-LAST:event_bt_registrarActionPerformed
+
+    private void mostrarDetallesSoftwareSeleccionado() {
+        int fila = tbl_software.getSelectedRow();
+        if (fila < 0) {
+            return;
+        }
+
+        int id = (int) tbl_software.getValueAt(fila, 0);
+        String nombre = (String) tbl_software.getValueAt(fila, 1);
+
+        JOptionPane.showMessageDialog(this,
+                "ID: " + id + "\nSoftware: " + nombre,
+                "Detalle del software",
+                JOptionPane.INFORMATION_MESSAGE);
+    }
+
+    private void mostrarDetallesEquipoSeleccionado() {
+        int fila = tbl_equipos.getSelectedRow();
+        if (fila < 0) {
+            return;
+        }
+
+        int id = (int) tbl_equipos.getValueAt(fila, 0);
+        String nombre = (String) tbl_equipos.getValueAt(fila, 1);
+        String tipo = (String) tbl_equipos.getValueAt(fila, 2);
+        String marca = (String) tbl_equipos.getValueAt(fila, 3);
+        String serie = (String) tbl_equipos.getValueAt(fila, 4);
+        String estado = (String) tbl_equipos.getValueAt(fila, 5);
+        String software = (String) tbl_equipos.getValueAt(fila, 6);
+
+        JOptionPane.showMessageDialog(this,
+                "ID: " + id + "\nNombre: " + nombre + "\nTipo: " + tipo + "\nMarca: " + marca
+                        + "\nSerie: " + serie + "\nEstado: " + estado + "\nSoftware: " + software,
+                "Detalle del equipo",
+                JOptionPane.INFORMATION_MESSAGE);
+    }
+
+    private void editarSoftwareSeleccionado() {
+        int fila = tbl_software.getSelectedRow();
+        if (fila < 0) {
+            return;
+        }
+
+        int id = (int) tbl_software.getValueAt(fila, 0);
+        String nombre = (String) tbl_software.getValueAt(fila, 1);
+
+        softwareSeleccionado = new Software();
+        softwareSeleccionado.setId(id);
+        softwareSeleccionado.setNombre(nombre);
+        jTextField1.setText(nombre);
+        editandoSoftware = true;
+        bt_registrar.setText("Guardar");
+    }
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

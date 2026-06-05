@@ -103,6 +103,18 @@ public class SoftwareDAO {
     return false;
 }
 
+    public boolean actualizar(Software s) {
+        String sql = "UPDATE software SET nombre = ? WHERE id = ?";
+        try (Connection conn = conexion.get(); PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setString(1, s.getNombre());
+            ps.setInt(2, s.getId());
+            return ps.executeUpdate() > 0;
+        } catch (SQLException e) {
+            System.err.println("Error al actualizar software: " + e.getMessage());
+            return false;
+        }
+    }
+
     /**
      * Elimina un registro de software por su identificador.
      *

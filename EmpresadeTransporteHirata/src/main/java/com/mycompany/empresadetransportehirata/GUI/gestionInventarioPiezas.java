@@ -7,6 +7,7 @@ package com.mycompany.empresadetransportehirata.GUI;
 import com.mycompany.empresadetransportehirata.Data.InventarioPiezasDAO;
 import com.mycompany.empresadetransportehirata.Logica.PiezaInventario;
 import java.awt.event.MouseAdapter;
+import java.awt.Color;
 import java.awt.event.MouseEvent;
 import java.sql.Date;
 import java.time.LocalDate;
@@ -156,13 +157,127 @@ public class gestionInventarioPiezas extends javax.swing.JInternalFrame {
     private void aplicarEstiloVisual() {
         id_txt.setEditable(false);
         fecha_txt.setEditable(false);
-        tablaInventario.setRowHeight(22);
+        tablaInventario.setRowHeight(26);
         tablaInventario.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         tablaInventario.getTableHeader().setReorderingAllowed(false);
         tablaInventario.setFillsViewportHeight(true);
         descripcion_ta.setFont(nombre_txt.getFont());
-        estadoFormulario_lb.setFont(estadoFormulario_lb.getFont().deriveFont(java.awt.Font.BOLD));
-        registrosVisibles_lb.setFont(registrosVisibles_lb.getFont().deriveFont(java.awt.Font.BOLD));
+
+        // Paleta y estilos tomados de gestionRegistrosMantenimiento
+        java.awt.Color fondoPrincipal = new java.awt.Color(242, 248, 255);
+        java.awt.Color fondoPanel = new java.awt.Color(230, 241, 252);
+        java.awt.Color colorTitulo = new java.awt.Color(22, 90, 148);
+        java.awt.Color colorCampo = new java.awt.Color(250, 253, 255);
+        java.awt.Color colorBordeCampo = new java.awt.Color(160, 192, 224);
+        java.awt.Color headerBg = new java.awt.Color(70, 130, 180);
+        java.awt.Color seleccion = new java.awt.Color(100, 149, 237);
+
+        getContentPane().setBackground(fondoPrincipal);
+        jPanel1.setBackground(fondoPanel);
+        jPanel2.setBackground(fondoPanel);
+        jPanel3.setBackground(fondoPanel);
+
+        javax.swing.border.Border bordePanel = javax.swing.BorderFactory.createTitledBorder(
+                javax.swing.BorderFactory.createLineBorder(new java.awt.Color(120, 170, 220), 2),
+                "",
+                javax.swing.border.TitledBorder.LEFT,
+                javax.swing.border.TitledBorder.DEFAULT_POSITION,
+                new java.awt.Font("Segoe UI", java.awt.Font.BOLD, 13),
+                colorTitulo);
+
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(
+                javax.swing.BorderFactory.createLineBorder(new java.awt.Color(120, 170, 220), 2),
+                "Datos de la pieza",
+                javax.swing.border.TitledBorder.LEFT,
+                javax.swing.border.TitledBorder.DEFAULT_POSITION,
+                new java.awt.Font("Segoe UI", java.awt.Font.BOLD, 13),
+                colorTitulo));
+        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(
+                javax.swing.BorderFactory.createLineBorder(new java.awt.Color(120, 170, 220), 2),
+                "Resumen de stock",
+                javax.swing.border.TitledBorder.LEFT,
+                javax.swing.border.TitledBorder.DEFAULT_POSITION,
+                new java.awt.Font("Segoe UI", java.awt.Font.BOLD, 13),
+                colorTitulo));
+        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(
+                javax.swing.BorderFactory.createLineBorder(new java.awt.Color(120, 170, 220), 2),
+                "Búsqueda y filtros",
+                javax.swing.border.TitledBorder.LEFT,
+                javax.swing.border.TitledBorder.DEFAULT_POSITION,
+                new java.awt.Font("Segoe UI", java.awt.Font.BOLD, 13),
+                colorTitulo));
+
+        // Etiquetas: color y fuente
+        javax.swing.JLabel[] labels = new javax.swing.JLabel[]{jLabel1,jLabel2,jLabel3,jLabel4,jLabel5,jLabel6,jLabel7,jLabel12,jLabel8,jLabel9,jLabel10,jLabel11,jLabel13,jLabel14,estadoFormulario_lb,registrosVisibles_lb,resumenTotal_lb,resumenStockBajo_lb,resumenUltimaActualizacion_lb,alertaStock_lb};
+        for (javax.swing.JLabel l : labels) {
+            if (l != null) {
+                l.setForeground(colorTitulo);
+                l.setFont(new java.awt.Font("Segoe UI", java.awt.Font.BOLD, 12));
+            }
+        }
+
+        // Campos y combos: fondo y borde
+        id_txt.setBackground(colorCampo);
+        nombre_txt.setBackground(colorCampo);
+        ubicacion_txt.setBackground(colorCampo);
+        fecha_txt.setBackground(colorCampo);
+        descripcion_ta.setBackground(colorCampo);
+        buscar_txt.setBackground(colorCampo);
+
+        id_txt.setBorder(javax.swing.BorderFactory.createLineBorder(colorBordeCampo, 2, true));
+        nombre_txt.setBorder(javax.swing.BorderFactory.createLineBorder(colorBordeCampo, 2, true));
+        ubicacion_txt.setBorder(javax.swing.BorderFactory.createLineBorder(colorBordeCampo, 2, true));
+        descripcion_ta.setBorder(javax.swing.BorderFactory.createLineBorder(colorBordeCampo, 2, true));
+        buscar_txt.setBorder(javax.swing.BorderFactory.createLineBorder(colorBordeCampo, 2, true));
+
+        unidad_cb.setBackground(colorCampo);
+        unidad_cb.setBorder(javax.swing.BorderFactory.createLineBorder(colorBordeCampo, 2, true));
+        filtroEstado_cb.setBackground(colorCampo);
+        filtroEstado_cb.setBorder(javax.swing.BorderFactory.createLineBorder(colorBordeCampo, 2, true));
+
+        // Botones: colores, fuente y bordes coherentes
+        btnGuardar.setBackground(new java.awt.Color(34, 139, 34));
+        btnGuardar.setForeground(java.awt.Color.WHITE);
+        btnGuardar.setFont(btnGuardar.getFont().deriveFont(java.awt.Font.BOLD));
+        btnGuardar.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(20, 100, 20), 2, true));
+        btnGuardar.setFocusPainted(false);
+
+        btnActualizar.setBackground(new java.awt.Color(255, 140, 0));
+        btnActualizar.setForeground(java.awt.Color.WHITE);
+        btnActualizar.setFont(btnActualizar.getFont().deriveFont(java.awt.Font.BOLD));
+        btnActualizar.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(200, 95, 0), 2, true));
+        btnActualizar.setFocusPainted(false);
+
+        btnEliminar.setBackground(new java.awt.Color(178, 34, 34));
+        btnEliminar.setForeground(java.awt.Color.WHITE);
+        btnEliminar.setFont(btnEliminar.getFont().deriveFont(java.awt.Font.BOLD));
+        btnEliminar.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(128, 20, 20), 2, true));
+        btnEliminar.setFocusPainted(false);
+
+        btnLimpiar.setBackground(new java.awt.Color(70, 130, 180));
+        btnLimpiar.setForeground(java.awt.Color.WHITE);
+        btnLimpiar.setFont(btnLimpiar.getFont().deriveFont(java.awt.Font.BOLD));
+        btnLimpiar.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(40, 90, 140), 2, true));
+        btnLimpiar.setFocusPainted(false);
+
+        btnLimpiarFiltros.setBackground(new java.awt.Color(70, 130, 180));
+        btnLimpiarFiltros.setForeground(java.awt.Color.WHITE);
+        btnLimpiarFiltros.setFont(btnLimpiarFiltros.getFont().deriveFont(java.awt.Font.BOLD));
+        btnLimpiarFiltros.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(40, 90, 140), 2, true));
+        btnLimpiarFiltros.setFocusPainted(false);
+
+        // Tabla: fuentes, cabecera y selección
+        tablaInventario.setBackground(java.awt.Color.WHITE);
+        tablaInventario.setSelectionBackground(seleccion);
+        tablaInventario.setSelectionForeground(java.awt.Color.WHITE);
+        tablaInventario.setFont(new java.awt.Font("Segoe UI", java.awt.Font.PLAIN, 12));
+        tablaInventario.getTableHeader().setFont(new java.awt.Font("Segoe UI", java.awt.Font.BOLD, 12));
+        tablaInventario.getTableHeader().setBackground(headerBg);
+        tablaInventario.getTableHeader().setForeground(java.awt.Color.WHITE);
+        tablaInventario.getTableHeader().setPreferredSize(new java.awt.Dimension(0, 30));
+        jScrollPane1.getViewport().setBackground(java.awt.Color.WHITE);
+        jScrollPane1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(120, 170, 220), 2));
+        tablaInventario.setGridColor(new java.awt.Color(210, 210, 210));
     }
 
     /**
@@ -824,7 +939,7 @@ public class gestionInventarioPiezas extends javax.swing.JInternalFrame {
 
     cantidad_spn.setModel(new javax.swing.SpinnerNumberModel(0, 0, null, 1));
 
-        unidad_cb.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Unidad", "Caja", "Kit", "Pack" }));
+        unidad_cb.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione una unidad", "Unidad", "Caja", "Kit", "Pack" }));
 
     stockMinimo_spn.setModel(new javax.swing.SpinnerNumberModel(0, 0, null, 1));
 
