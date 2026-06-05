@@ -18,8 +18,8 @@ import javax.swing.table.DefaultTableModel;
 import java.util.List;
 
 /**
- *
- * @author bruno
+ * Ventana de gestión de software.
+ * Permite registrar, editar, eliminar software y asignarlo/desasignarlo a equipos de oficina.
  */
 public class gestionSoftware extends javax.swing.JInternalFrame {
 
@@ -53,6 +53,7 @@ public class gestionSoftware extends javax.swing.JInternalFrame {
         this.setTitle("Gestión de Software");
     }
 
+    /** Aplica la paleta de colores, fuentes y bordes consistente del sistema. */
     private void aplicarEstiloVisual() {
         Color fondoPrincipal = new Color(242, 248, 255);
         Color fondoPanel = new Color(230, 241, 252);
@@ -146,6 +147,7 @@ public class gestionSoftware extends javax.swing.JInternalFrame {
         jScrollPane2.setBorder(javax.swing.BorderFactory.createLineBorder(new Color(120, 170, 220), 2));
     }
 
+    /** Configura los menús contextuales de las tablas de software y equipos. */
     private void configurarPopupMenus() {
         JPopupMenu menuSoftware = new JPopupMenu();
 
@@ -206,6 +208,7 @@ public class gestionSoftware extends javax.swing.JInternalFrame {
         });
     }
 
+    /** Selecciona la fila de la tabla que corresponde al punto del evento del mouse. */
     private void seleccionarFilaDesdeEvento(javax.swing.JTable tabla, MouseEvent evt) {
         int fila = tabla.rowAtPoint(evt.getPoint());
         if (fila >= 0) {
@@ -213,6 +216,7 @@ public class gestionSoftware extends javax.swing.JInternalFrame {
         }
     }
 
+    /** Captura el software seleccionado en la tabla y actualiza el campo de texto. */
     private void seleccionarSoftwareDesdeTabla() {
         int fila = tbl_software.getSelectedRow();
         if (fila < 0) {
@@ -228,6 +232,7 @@ public class gestionSoftware extends javax.swing.JInternalFrame {
         software_txt.setText(nombre);
     }
 
+    /** Captura el equipo seleccionado en la tabla y actualiza el campo ID. */
     private void seleccionarEquipoDesdeTabla() {
         int fila = tbl_equipos.getSelectedRow();
         if (fila < 0) {
@@ -765,6 +770,7 @@ public class gestionSoftware extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_bt_registrarActionPerformed
 
+    /** Muestra un diálogo con los detalles del software seleccionado. */
     private void mostrarDetallesSoftwareSeleccionado() {
         int fila = tbl_software.getSelectedRow();
         if (fila < 0) {
@@ -780,6 +786,7 @@ public class gestionSoftware extends javax.swing.JInternalFrame {
                 JOptionPane.INFORMATION_MESSAGE);
     }
 
+    /** Muestra un diálogo con los detalles del equipo seleccionado. */
     private void mostrarDetallesEquipoSeleccionado() {
         int fila = tbl_equipos.getSelectedRow();
         if (fila < 0) {
@@ -801,6 +808,7 @@ public class gestionSoftware extends javax.swing.JInternalFrame {
                 JOptionPane.INFORMATION_MESSAGE);
     }
 
+    /** Carga el software seleccionado en el campo de texto para editar su nombre. */
     private void editarSoftwareSeleccionado() {
         int fila = tbl_software.getSelectedRow();
         if (fila < 0) {

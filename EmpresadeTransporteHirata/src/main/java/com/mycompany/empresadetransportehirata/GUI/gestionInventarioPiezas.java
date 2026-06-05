@@ -846,6 +846,7 @@ public class gestionInventarioPiezas extends javax.swing.JInternalFrame {
     /**
      * Evita nulls visibles cuando se cargan datos de una pieza existente.
      */
+    /** Retorna el valor original o cadena vacía si es null. */
     private String valorSeguro(String valor) {
         return valor == null ? "" : valor;
     }
@@ -853,6 +854,7 @@ public class gestionInventarioPiezas extends javax.swing.JInternalFrame {
     /**
      * Reemplaza descripciones vacías por un texto amigable para la interfaz.
      */
+    /** Retorna la descripción o un texto genérico si está vacía o es null. */
     private String descripcionVisible(String descripcion) {
         if (descripcion == null || descripcion.isBlank()) {
             return "Sin descripción registrada";

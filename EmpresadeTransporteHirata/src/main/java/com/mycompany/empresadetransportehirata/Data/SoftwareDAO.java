@@ -90,6 +90,11 @@ public class SoftwareDAO {
             return false;
         }
     }
+    /**
+     * Verifica si un software está asignado a algún equipo.
+     * @param idSoftware identificador del software
+     * @return {@code true} si al menos un equipo lo tiene asignado
+     */
     public boolean estaAsignado(int idSoftware) {
     String sql = "SELECT COUNT(*) FROM equipos_oficina WHERE id_software = ?";
     try (Connection conn = conexion.get(); PreparedStatement ps = conn.prepareStatement(sql)) {
@@ -103,6 +108,11 @@ public class SoftwareDAO {
     return false;
 }
 
+    /**
+     * Actualiza el nombre de un software existente.
+     * @param s entidad con id y nombre actualizados
+     * @return {@code true} si se actualizó al menos una fila
+     */
     public boolean actualizar(Software s) {
         String sql = "UPDATE software SET nombre = ? WHERE id = ?";
         try (Connection conn = conexion.get(); PreparedStatement ps = conn.prepareStatement(sql)) {

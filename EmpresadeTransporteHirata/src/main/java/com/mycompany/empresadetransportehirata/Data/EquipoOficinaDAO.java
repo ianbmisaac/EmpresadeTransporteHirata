@@ -6,8 +6,16 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Acceso a datos para la entidad {@link EquipoOficina}.
+ * Encapsula operaciones CRUD sobre la tabla equipos_oficina.
+ */
 public class EquipoOficinaDAO {
 
+    /**
+     * Lista todos los equipos de oficina registrados, incluyendo su software asociado.
+     * @return lista completa de equipos; vacía si no hay registros o falla la consulta
+     */
     public List<EquipoOficina> listar() {
         List<EquipoOficina> lista = new ArrayList<>();
         String sql = "SELECT e.id, e.nombre, e.tipo, e.marca, e.modelo, e.serie, e.estado, "
@@ -24,6 +32,11 @@ public class EquipoOficinaDAO {
         return lista;
     }
 
+    /**
+     * Persiste un nuevo equipo de oficina.
+     * @param e entidad {@link EquipoOficina} a guardar
+     * @return {@code true} si se insertó correctamente
+     */
     public boolean guardar(EquipoOficina e) {
         String sql = "INSERT INTO equipos_oficina (nombre, tipo, marca, modelo, serie, estado) VALUES (?,?,?,?,?,?)";
         try (Connection conn = conexion.get(); PreparedStatement ps = conn.prepareStatement(sql)) {
@@ -40,6 +53,11 @@ public class EquipoOficinaDAO {
         }
     }
 
+    /**
+     * Actualiza los datos de un equipo existente.
+     * @param e entidad con id y datos actualizados
+     * @return {@code true} si se actualizó al menos una fila
+     */
     public boolean actualizar(EquipoOficina e) {
         String sql = "UPDATE equipos_oficina SET nombre=?, tipo=?, marca=?, modelo=?, serie=?, estado=? WHERE id=?";
         try (Connection conn = conexion.get(); PreparedStatement ps = conn.prepareStatement(sql)) {
@@ -57,6 +75,11 @@ public class EquipoOficinaDAO {
         }
     }
 
+    /**
+     * Elimina un equipo por su identificador.
+     * @param id identificador del equipo a eliminar
+     * @return {@code true} si se eliminó al menos una fila
+     */
     public boolean eliminar(int id) {
         String sql = "DELETE FROM equipos_oficina WHERE id=?";
         try (Connection conn = conexion.get(); PreparedStatement ps = conn.prepareStatement(sql)) {
@@ -68,6 +91,12 @@ public class EquipoOficinaDAO {
         }
     }
 
+    /**
+     * Convierte una fila del ResultSet en una entidad {@link EquipoOficina}.
+     * @param rs fila actual del resultado SQL
+     * @return entidad mapeada
+     * @throws SQLException si falla la lectura de alguna columna
+     */
     private EquipoOficina mapear(ResultSet rs) throws SQLException {
         Software software = null;
         int idSoftware = rs.getInt("idSoftware");
